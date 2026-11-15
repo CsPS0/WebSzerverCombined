@@ -1,58 +1,90 @@
-# NJSZKI - WebSzerverCombined
+# 🚀 NJSZKI — WebSzerverCombined
 
-* Ez egy egyesített repó a **Vite (Frontend)** és a **JSON-Server (Backend)** projektekből. A célja, hogy megkönnyítse az iskolai feladatok megoldását: így nem kell két külön projektet klónozni és kezelni.
-* Az alap kódok **@ignazcdominik**-tól származnak. Ez a projekt az ő munkájára épül, a feladatok egyszerűbb megoldása érdekében készült.
-* (Kizárólag könnyebb vagy nem dolgozati szintű feladatokhoz ajánlott.)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![JSON-Server](https://img.shields.io/badge/JSON--Server-Mock_API-blue?style=for-the-badge)](https://github.com/typicode/json-server)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-## Főbb Jellemzők
-- **Egyesített Indítás:** A `pnpm dev` parancs egyszerre indítja el a frontendet és a backendet.
-- **Beépített Proxy:** A frontend kérések (`/api/...`) automatikusan a backendre (`localhost:3000`) irányítódnak, így nem kell CORS hibákkal küzdeni.
-- **Modularizált Backend:** A szerver logikája (`relationships.js`) le van választva, így a kód átláthatóbb.
-- **Többféle Futási Mód:** Támogatja a Docker, Node.js és PHP alapú környezeteket is.
+Integrált, full-stack helyi fejlesztői környezet és proxy sablon, amely egyesíti a modern **Vite (Frontend)** és a moduláris **JSON-Server (Backend)** képességeit iskolai és gyakorlati feladatok egyszerű megoldásához.
 
-## Telepítés
-Először telepítsd a függőségeket:
-```sh
+> 💡 **Eredeti kód & inspiráció:** Az alap struktúra és kódok **[@ignaczdominik](https://github.com/ignaczdominik)** munkájára épülnek.
+
+---
+
+## 🌟 Főbb Jellemzők
+
+- **Egyesített Indítás:** A `pnpm dev` futtatásával egyszerre indul el a Vite Hot Module Replacement (HMR) szervere és a JSON-Server REST API, így nem szükséges külön terminálokat menedzselni.
+- **Automatikus Reverse Proxy:** A frontend felől érkező `/api/...` hálózati kéréseket a Vite belső proxyja transzparensen továbbítja a backendre (`localhost:3000`), elkerülve a CORS (Cross-Origin Resource Sharing) problémákat.
+- **Relációs Adatkezelés:** A szerver logikájából leválasztott `relationships.js` modul lehetővé teszi összetett mock adatkapcsolatok (foreign key, relációk) kezelését.
+- **Többféle Futtatási Mód:**
+  * Szabványos helyi Node.js fejlesztés
+  * Konténerizált futtatás `docker-compose`-zal
+  * Beépített PHP webszerver mód (`php -S`), amennyiben a feladat PHP környezetet követel meg.
+
+---
+
+## 🗺️ Hálózati Port-kiosztás
+
+| Szolgáltatás | Belső Cím / Port | Megjegyzés |
+|:---|:---|:---|
+| **Frontend (Vite Dev)** | `http://localhost:8080` | Fejlesztői felület gyors újrafordítással (HMR) |
+| **Backend (JSON-Server)** | `http://localhost:3000` | REST API végpontok és adatbázis |
+| **Belső API Proxy** | `http://localhost:8080/api` | CORS-mentes belső útvonal a frontendből |
+| **PHP Webszerver Mód** | `http://localhost:8000` | Statikus/PHP teszteléshez (`pnpm php`) |
+
+---
+
+## 🚀 Telepítés és Indítás
+
+### 1. Függőségek telepítése
+```bash
 pnpm install
-# Vagy ha npm-et használsz:
+# vagy npm esetén:
 npm install
 ```
 
-## Indítási Módok
-
-### 1. Fejlesztés (Ajánlott)
-Ez a mód elindítja a Vite fejlesztői szervert (Hot Module Replacement-tel) és a JSON-Servert is egy terminálablakban.
-```sh
+### 2. Fejlesztői mód (Ajánlott)
+Egyszerre elindítja a frontendet és a backend REST szervert egyetlen terminálban:
+```bash
 pnpm dev
 ```
-- Frontend: `http://localhost:8080`
-- Backend: `http://localhost:3000` (Proxy-n keresztül: `http://localhost:8080/api`)
+Nyisd meg a böngészőben: **`http://localhost:8080`**
 
-### 2. Docker (Teljes környezet)
-Ha konténerizálva szeretnéd futtatni az egészet:
-```sh
+### 3. Docker konténerben történő futtatás
+Teljes elszigetelt környezet indítása Docker Compose segítségével:
+```bash
 docker-compose up --build
 ```
-A projekt a `http://localhost:3000` címen lesz elérhető (a frontend buildelődik és a node szerver szolgálja ki).
+A szolgáltatás elérhető: `http://localhost:3000`
 
-### 3. PHP Mód (Statikus kiszolgálás)
-Ha a feladat PHP-s kiszolgálást kér a frontendhez (pl. `php -S`):
-```sh
+### 4. PHP kompatibilitási mód
+Ha az adott feladat statikus kiszolgálást vagy natív PHP webszervert kér:
+```bash
 pnpm php
 ```
-Ez a parancs:
-1. Lefordítja a frontendet (`dist` mappába).
-2. Elindítja a PHP szervert a `dist` mappán (`localhost:8000`).
-3. A háttérben elindítja a Node.js backendet is (`localhost:3000`), hogy az API hívások működjenek.
+Ez a parancs lefordítja a frontendet a `dist` mappába, elindítja a PHP beépített szerverét (`localhost:8000`), miközben a háttérben futtatja a Node.js REST API-t is.
 
-### 4. Hagyományos Node.js Start
-Ha csak a kész, lefordított verziót szeretnéd futtatni Node-dal:
-```sh
-pnpm start
+---
+
+## 🗂️ Mappastruktúra
+
+```
+├── data/
+│   └── db.json            # A JSON-Server adatbázisa
+├── public/                # Statikus webes eszközök (képek, ikonok)
+├── src/                   # A frontend alkalmazás forráskódja
+├── Dockerfile             # Docker konténer definíció
+├── docker-compose.yml     # Többkonténeres futtatási konfiguráció
+├── relationships.js       # Relációs mock adatkapcsolatok logikája
+├── server.js              # A backend API szerver belépési pontja
+└── vite.config.js         # Vite konfiguráció és beépített /api reverse proxy
 ```
 
-## Projekt Struktúra
-- **`src/`**: A Vue/React/JS frontend forráskódja.
-- **`data/`**: A backend adatbázisa (`db.json`) és konfigurációi.
-- **`server.js`**: A backend belépési pontja.
-- **`relationships.js`**: A backend adatkapcsolati logikája.
+---
+
+## 📄 Licenc és Köszönetnyilvánítás
+
+- **Eredeti kód:** [@ignaczdominik](https://github.com/ignaczdominik)
+- **Karbantartó:** [Solti Csongor Péter](https://github.com/CsPS0)
+- **Licenc:** [MIT Licenc](./LICENSE)
