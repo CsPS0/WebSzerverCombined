@@ -1,4 +1,4 @@
-# 🚀 NJSZKI — WebSzerverCombined
+# NJSZKI — WebSzerverCombined
 
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![JSON-Server](https://img.shields.io/badge/JSON--Server-Mock_API-blue?style=for-the-badge)](https://github.com/typicode/json-server)
@@ -8,11 +8,11 @@
 
 Integrált, full-stack helyi fejlesztői környezet és proxy sablon, amely egyesíti a modern **Vite (Frontend)** és a moduláris **JSON-Server (Backend)** képességeit iskolai és gyakorlati feladatok egyszerű megoldásához.
 
-> 💡 **Eredeti kód & inspiráció:** Az alap struktúra és kódok **[@ignaczdominik](https://github.com/ignaczdominik)** munkájára épülnek.
+> **Eredeti kód & inspiráció:** Az alap struktúra és kódok **[@ignaczdominik](https://github.com/ignaczdominik)** munkájára épülnek.
 
 ---
 
-## 🌟 Főbb Jellemzők
+## Főbb Jellemzők
 
 - **Egyesített Indítás:** A `pnpm dev` futtatásával egyszerre indul el a Vite Hot Module Replacement (HMR) szervere és a JSON-Server REST API, így nem szükséges külön terminálokat menedzselni.
 - **Automatikus Reverse Proxy:** A frontend felől érkező `/api/...` hálózati kéréseket a Vite belső proxyja transzparensen továbbítja a backendre (`localhost:3000`), elkerülve a CORS (Cross-Origin Resource Sharing) problémákat.
@@ -24,7 +24,7 @@ Integrált, full-stack helyi fejlesztői környezet és proxy sablon, amely egye
 
 ---
 
-## 🗺️ Hálózati Port-kiosztás
+## Hálózati Port-kiosztás
 
 | Szolgáltatás | Belső Cím / Port | Megjegyzés |
 |:---|:---|:---|
@@ -35,7 +35,7 @@ Integrált, full-stack helyi fejlesztői környezet és proxy sablon, amely egye
 
 ---
 
-## 🚀 Telepítés és Indítás
+## Telepítés és Indítás
 
 ### 1. Függőségek telepítése
 ```bash
@@ -67,7 +67,7 @@ Ez a parancs lefordítja a frontendet a `dist` mappába, elindítja a PHP beép�
 
 ---
 
-## 🗂️ Mappastruktúra
+## Mappastruktúra
 
 ```
 ├── data/
@@ -83,7 +83,7 @@ Ez a parancs lefordítja a frontendet a `dist` mappába, elindítja a PHP beép�
 
 ---
 
-## 📄 Licenc és Köszönetnyilvánítás
+## Licenc és Köszönetnyilvánítás
 
 - **Eredeti kód:** [@ignaczdominik](https://github.com/ignaczdominik)
 - **Karbantartó:** [Solti Csongor Péter](https://github.com/CsPS0)
